@@ -1,5 +1,6 @@
 package com.example.XpenseTracker.controllers;
 
+import com.example.XpenseTracker.exceptions.ResourceNotFoundException;
 import com.example.XpenseTracker.models.ExpenseModel;
 import com.example.XpenseTracker.services.ExpenseServices;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +34,7 @@ public class XpenseController {
 
     @CrossOrigin
     @GetMapping("/find/{id}")
-    public Optional<ExpenseModel> findExpenseById(@RequestParam Long id){
+    public Optional<ExpenseModel> findExpenseById(@PathVariable Long id) throws ResourceNotFoundException {
         return expenseServices.findExpenseById(id);
     }
 }

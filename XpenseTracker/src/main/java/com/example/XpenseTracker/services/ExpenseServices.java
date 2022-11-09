@@ -1,11 +1,9 @@
 package com.example.XpenseTracker.services;
 
+import com.example.XpenseTracker.exceptions.ResourceNotFoundException;
 import com.example.XpenseTracker.models.ExpenseModel;
 import com.example.XpenseTracker.repositories.ExpenseRepository;
-import net.bytebuddy.asm.Advice;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,11 +26,15 @@ public class ExpenseServices {
         return expenseRepository.save(expenseModel);
     }
 
-    public List<ExpenseModel> findAllExpenses(){
-        return expenseRepository.findAll();
+    public Optional<ExpenseModel> findExpenseById(Long id) throws ResourceNotFoundException {
+        Optional<ExpenseModel> expenseModel = expenseRepository.findById(id);
+        if (expenseModel.isPresent()){
+            return expenseModel;
+        }else
+            throw new ResourceNotFoundException("Resource" + id + " cannot be found!");
     }
 
-    public Optional<ExpenseModel> findExpenseById(Long id){
-        return expenseRepository.findById(id);
+    public List<ExpenseModel> findAllExpenses(){
+        return expenseRepository.findAll();
     }
 }

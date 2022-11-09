@@ -10,11 +10,11 @@ import java.util.Optional;
 
 @RequestMapping("/api/expenses")
 @RestController
-public class XpenseController {
+public class ExpenseController {
 
     private final ExpenseServices expenseServices;
 
-    public XpenseController(ExpenseServices expenseServices) {
+    public ExpenseController(ExpenseServices expenseServices) {
         this.expenseServices = expenseServices;
     }
 
@@ -36,5 +36,11 @@ public class XpenseController {
     @GetMapping("/find/{id}")
     public Optional<ExpenseModel> findExpenseById(@PathVariable Long id) throws ResourceNotFoundException {
         return expenseServices.findExpenseById(id);
+    }
+
+    @CrossOrigin
+    @DeleteMapping("/delete/{id}")
+    public void deleteById(@PathVariable Long id){
+        expenseServices.deleteById(id);
     }
 }

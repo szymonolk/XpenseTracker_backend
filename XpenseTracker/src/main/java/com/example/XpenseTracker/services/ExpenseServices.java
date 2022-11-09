@@ -37,4 +37,9 @@ public class ExpenseServices {
     public List<ExpenseModel> findAllExpenses(){
         return expenseRepository.findAll();
     }
+
+    public void deleteById(Long id){
+        System.out.println(id + " has been deleted");
+        expenseRepository.deleteById(id);
+    }
 }

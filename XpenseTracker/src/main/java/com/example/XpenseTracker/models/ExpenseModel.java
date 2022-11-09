@@ -24,7 +24,7 @@ public class ExpenseModel extends BaseEntity {
     private String expenseName;
     @Setter
     private String priority;
-
+    private String description;
 
     @Override
     public String toString() {
